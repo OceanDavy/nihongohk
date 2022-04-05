@@ -1,0 +1,64 @@
+div.flashcard-box {
+    margin: 25px 10px;
+    justify-content: center;
+    div.flashcard{
+        width: 300px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f1e8b5;
+        border: 1px solid black;
+        border-radius: 10px;
+        
+        div.partA {
+            position: relative;
+            width: inherit;
+            p.score{
+                position: absolute;
+                left: 15px;
+                top: 0px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            p.chart{
+                font-size: 8.25rem;
+            }
+            div.win-message {
+                padding: 0px 15px;
+                width: 100%;
+                align-items: center;
+                justify-content: space-between;
+
+                p.correct{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: #70a83b;
+                 }
+                p.next{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: #64adff;
+                    cursor: pointer;
+                 }
+                p.next:hover{
+                    color: #4da0ff;
+                }
+            }
+        }
+
+        div.partB{
+            div.options{
+                padding: 6px 0px;
+                display: flex;
+                justify-content: space-around;
+                p{
+                    font-size: 30px;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

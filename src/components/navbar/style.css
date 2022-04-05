@@ -1,0 +1,118 @@
+@-webkit-keyframes firstCloud {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -170%;
+  }
+}
+
+@keyframes firstCloud {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -170%;
+  }
+}
+
+div.Navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  color: white;
+  background-color: #ff4c4c;
+  font-family: 'Francois One', sans-serif;
+}
+
+div.Navbar h1.title {
+  padding-right: 10px;
+  padding-left: 10px;
+  font-weight: bold;
+  text-shadow: 2px 1px 4px black;
+}
+
+div.Navbar div.subtitles {
+  position: absolute;
+  top: 60px;
+  left: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-animation: firstCloud 15s linear 2s infinite;
+          animation: firstCloud 15s linear 2s infinite;
+}
+
+div.Navbar div.subtitles h3.subtitle span {
+  font-weight: bold;
+}
+
+div.Navbar div.subtitles h3.hiragana-subtitle {
+  padding-right: 50px;
+}
+
+@keyframes firstCloud {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -170%;
+  }
+}
+
+div.Navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  color: white;
+  background-color: #ff4c4c;
+  font-family: 'Francois One', sans-serif;
+}
+
+div.Navbar h1.title {
+  padding-right: 10px;
+  padding-left: 10px;
+  font-weight: bold;
+  text-shadow: 2px 1px 4px black;
+}
+
+div.Navbar div.subtitles {
+  position: absolute;
+  top: 60px;
+  left: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-animation: firstCloud 15s linear 2s infinite;
+          animation: firstCloud 15s linear 2s infinite;
+}
+
+div.Navbar div.subtitles h3.subtitle span {
+  font-weight: bold;
+}
+
+div.Navbar div.subtitles h3.hiragana-subtitle {
+  padding-right: 50px;
+}
+
+@media only screen and (min-width: 950px) {
+  div.Navbar {
+    background-color: blueviolet;
+  }
+}
+
+@keyframes firstCloud {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -170%;
+  }
+}
+/*# sourceMappingURL=style.css.map */

@@ -21,38 +21,50 @@ let hiraganaArr = [
     ["N", "ん"]
   ];
 
-let randomHira = [];
-let romanjiCards = [];
-let guess = [];
+  let toGuess = [];
+  let cards = [];
 
 export class Flashcard extends Component {
-  
   state = {
     guessCard: [],
     optionsCards: [],
-    score: 0
+    score: 0,
+    status: "",
+    next: ""
   }
-  
+
   componentDidMount(){
     this.randomGenerate();
   }
-  
-  randomGenerate(){
-    for(let i=0; i < 3; i++){
-      randomHira = hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)];
-      guess = (randomHira[0]);
-    }
-    guess = randomHira[1]; //The Hiragana Chart to display
 
-    console.log("Guess: " + guess);
-    console.log(randomHira + " Real One");
-    console.log(romanjiCards);
-    
-    
+  randomGenerate(){
+    cards = [];
+
+    for(let i=0; i < 3; i++){
+      cards.push(hiraganaArr[Math.floor(Math.random() * hiraganaArr.length)]);
+    }
+    toGuess = cards[Math.floor(Math.random() * cards.length)];
+    console.log(toGuess);
+    console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
+
         this.setState({
-          guessCard: guess,
-          optionsCards: romanjiCards
+          guessCard: toGuess,
+          optionsCards: cards
         });
+  }
+
+  guessMethod(a){
+    if(a === toGuess[0]){
+      this.setState({
+        status: "Correct!",
+        next: "next"
+      });
+    } else{
+      this.setState({
+        status: "Wrong",
+        next: "restart"
+      });
+    }
   }
 
   render() {
@@ -61,20 +73,20 @@ export class Flashcard extends Component {
           <div className='flashcard'>
             {/* CHART TO GUESS SECTION */ }
             <div className='partA flex flex-fd-c flex-ai-c'>
-                <p className='score' id='score'>Score: 0</p>
-                <p className='chart' id='chart'> { this.state.guessCard } </p>
+                <p className='score' id='score'>Score: { this.state.score }</p>
+                <p className='chart' id='chart'> { this.state.guessCard[1] } </p>
                 <div className='win-message flex'>
-                    <p className='correct' id='correct'>Correct!</p>
-                    <p className='next' id='next' onClick={ () => {this.randomGenerate()}}>Next</p>
+                    <p className='correct' id='correct'> { this.state.status }</p>
+                    <p className='next' id='next' onClick={ () => {this.randomGenerate()}}> { this.state.next } </p>
                 </div>
             </div>
             {/* OPTIONS SECTION */ }
             <div className='partB'> 
                 <h3>Choose Your Answer</h3>
                 <div className='options'>
-                    <p> {this.state.optionsCards[2]} </p>
-                    <p> {this.state.optionsCards[0]} </p>
-                    <p> {this.state.optionsCards[1]} </p>
+                  <p onClick={() => this.guessMethod(this.state.optionsCards[2][0])}> { cards[2] }</p>
+                  <p onClick={() => this.guessMethod(this.state.optionsCards[1][0])}> { cards[1] } </p>
+                  <p onClick={() => this.guessMethod(this.state.optionsCards[0][0])}> { cards[0] }</p>
                 </div>
             </div>
           </div>

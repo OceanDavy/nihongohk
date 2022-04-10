@@ -21,10 +21,30 @@ let hiraganaArr = [
     ["N", "ん"]
   ];
 
+  let katakanaArr = [
+    ["A", "ア"], ["I", "イ"], ["U", "ウ"],
+    ["E", "エ"], ["O", "オ"], ["KA", "カ"],
+    ["KI", "キ"], ["KU", "ク"], ["KE", "ケ"],
+    ["KO", "コ"], ["SA", "サ"], ["SHI", "シ"],
+    ["SU", "ス"], ["SE", "セ "], ["SO", "ソ"],
+    ["TA", "タ"], ["CHI", "チ"], ["TSU", "ツ"],
+    ["TE", "テ"], ["TO", "ト"], ["NA", "ナ"],
+    ["NI", "ニ"], ["NU", "ヌ"], ["NE", "ネ"],
+    ["NO", "ノ"], ["HA", "ハ"], ["HI", "ヒ"],
+    ["FU", "フ"], ["HE", "ヘ"], ["HO", "ホ"],
+    ["MA", "マ"], ["MI", "ミ"], ["MU", "ム"],
+    ["ME", "メ"], ["MO", "モ"], ["YA", "ヤ"],
+    ["YU", "ユ"], ["YO", "ヨ"], ["RA", "ラ"],
+    ["RI", "リ"], ["RU", "ル"], ["RE", "レ"],
+    ["RO", "ロ"], ["WA", "ワ"], ["O", "ヲ"],
+    ["N", "ン"]
+  ];
+
   let toGuess = [];
   let cards = [];
 
 export class Flashcard extends Component {
+
   state = {
     guessCard: [],
     optionsCards: [],
@@ -37,7 +57,7 @@ export class Flashcard extends Component {
     this.randomGenerate();
   }
 
-  randomGenerate(){
+  hiraganaGenerate(){
     cards = [];
 
     for(let i=0; i < 3; i++){
@@ -49,20 +69,48 @@ export class Flashcard extends Component {
 
         this.setState({
           guessCard: toGuess,
-          optionsCards: cards
+          optionsCards: cards,
+          status: "",
+          next: ""
         });
+  }
+
+  katakanaGenerate(){
+    cards = [];
+
+    for(let i=0; i < 3; i++){
+      cards.push(katakanaArr[Math.floor(Math.random() * katakanaArr.length)]);
+    }
+    toGuess = cards[Math.floor(Math.random() * cards.length)];
+    console.log(toGuess);
+    console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
+
+        this.setState({
+          guessCard: toGuess,
+          optionsCards: cards,
+          status: "",
+          next: ""
+        });
+  }
+
+  changeChart(){
+
   }
 
   guessMethod(a){
     if(a === toGuess[0]){
-      this.setState({
-        status: "Correct!",
-        next: "next"
+      this.setState((prevState) => {
+        return{
+          status: "Correct!",
+          next: "next",
+          score: prevState.score + 5
+        }
       });
     } else{
       this.setState({
         status: "Wrong",
-        next: "restart"
+        next: "restart",
+        score: 0
       });
     }
   }

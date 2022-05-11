@@ -1,8 +1,19 @@
-import React, { Component } from 'react';
-
+import React, {Fragment, useState } from 'react';
+import OptionChart from '../optionchart/OptionChart';
 import "./flashcard.css";
 
-let hiraganaArr = [
+
+const Flashcard = () => {
+  
+  const [data, setData] = useState({
+    guessCard: [],
+    optionsCards: [],
+    score: 0,
+    status: "",
+    next: ""
+  });
+
+  let hiraganaArr = [
     ["A", "あ"], ["I", "い"], ["U", "う"],
     ["E", "え"], ["O", "お"], ["KA", "か"],
     ["KI", "き"], ["KU", "く"], ["KE", "け"],
@@ -20,7 +31,7 @@ let hiraganaArr = [
     ["RO", "ろ"], ["WA", "わ"], ["O", "を"],
     ["N", "ん"]
   ];
-
+  
   let katakanaArr = [
     ["A", "ア"], ["I", "イ"], ["U", "ウ"],
     ["E", "エ"], ["O", "オ"], ["KA", "カ"],
@@ -39,25 +50,11 @@ let hiraganaArr = [
     ["RO", "ロ"], ["WA", "ワ"], ["O", "ヲ"],
     ["N", "ン"]
   ];
-
+  
   let toGuess = [];
   let cards = [];
 
-export class Flashcard extends Component {
-
-  state = {
-    guessCard: [],
-    optionsCards: [],
-    score: 0,
-    status: "",
-    next: ""
-  }
-
-  componentDidMount(){
-    this.randomGenerate();
-  }
-
-  hiraganaGenerate(){
+  const hiraganaGenerate = () =>{
     cards = [];
 
     for(let i=0; i < 3; i++){
@@ -67,15 +64,16 @@ export class Flashcard extends Component {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        this.setState({
+        setData((prevState) => ({
+          ...prevState,
           guessCard: toGuess,
           optionsCards: cards,
           status: "",
           next: ""
-        });
-  }
+        }));
+  };
 
-  katakanaGenerate(){
+const katakanaGenerate = () => {
     cards = [];
 
     for(let i=0; i < 3; i++){
@@ -85,62 +83,65 @@ export class Flashcard extends Component {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        this.setState({
+        setData((prevState) => ({
+          ...prevState,
           guessCard: toGuess,
           optionsCards: cards,
           status: "",
           next: ""
-        });
+        }));
+  };
+
+const guessMethod = (answer) => {
+  if(answer === data.guessCard[1]){
+    console.log("Correct! " + answer);
+    console.log(data);
+    setData((prevState) => ({
+      ...prevState,
+      score: prevState.score + 5,
+      status: "Correct!",
+      next: "Next!"
+    }));
+  } else{
+    console.log("RIP");
+  }
   }
 
-  changeChart(){
-
+  const nextChart = () => {
+    
   }
-
-  guessMethod(a){
-    if(a === toGuess[0]){
-      this.setState((prevState) => {
-        return{
-          status: "Correct!",
-          next: "next",
-          score: prevState.score + 5
-        }
-      });
-    } else{
-      this.setState({
-        status: "Wrong",
-        next: "restart",
-        score: 0
-      });
-    }
-  }
-
-  render() {
+  
     return (
-      <div className='flashcard-box flex'>
-          <div className='flashcard'>
-            {/* CHART TO GUESS SECTION */ }
-            <div className='partA flex flex-fd-c flex-ai-c'>
-                <p className='score' id='score'>Score: { this.state.score }</p>
-                <p className='chart' id='chart'> { this.state.guessCard[1] } </p>
-                <div className='win-message flex'>
-                    <p className='correct' id='correct'> { this.state.status }</p>
-                    <p className='next' id='next' onClick={ () => {this.randomGenerate()}}> { this.state.next } </p>
-                </div>
+      <Fragment>
+        <OptionChart 
+          optionHiragana={hiraganaGenerate} 
+          optionKatakana={katakanaGenerate} 
+        />
+        <div className='flashcard-box flex'>
+            <div className='flashcard'>
+              {/* CHART TO GUESS SECTION */ }
+              <div className='partA flex flex-fd-c flex-ai-c'>
+                  <p className='score' id='score'>Score: { data.score }</p>
+                  <p className='chart' id='chart'> { data.guessCard[1] } </p>
+                  <div className='win-message flex'>
+                      <p className='correct' id='correct'> { data.status }</p>
+                      <p className='next' id='next'> { data.next } </p>
+                  </div>
+              </div>
+              {/* OPTIONS SECTION */ }
+              <div className='partB'> 
+                  <h3>Choose Your Answer</h3>
+                  <div className='options'>
+                    { data.optionsCards.map((datas, i) => (
+                        <p onClick={() => guessMethod(datas[1])} key={i}> { datas[0] } </p>    
+                      ))}
+                  </div>
+              </div>
             </div>
-            {/* OPTIONS SECTION */ }
-            <div className='partB'> 
-                <h3>Choose Your Answer</h3>
-                <div className='options'>
-                  <p onClick={() => this.guessMethod(this.state.optionsCards[2][0])}> { cards[2] }</p>
-                  <p onClick={() => this.guessMethod(this.state.optionsCards[1][0])}> { cards[1] } </p>
-                  <p onClick={() => this.guessMethod(this.state.optionsCards[0][0])}> { cards[0] }</p>
-                </div>
-            </div>
-          </div>
-      </div>
+        </div>
+        </Fragment>
+
     )
   }
-}
 
-export default Flashcard
+export default Flashcard;

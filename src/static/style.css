@@ -14,6 +14,36 @@ div.container {
   background-color: #ffff;
 }
 
+div.container div.chartoption {
+  font-family: 'Abel', sans-serif;
+}
+
+div.container div.chartoption p {
+  padding: 4px 6px;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  font-size: 1.25rem;
+  border-radius: 4px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+div.container div.chartoption p:hover {
+  opacity: .9;
+}
+
+div.container div.chartoption p.hiragana-option {
+  width: 95px;
+  color: white;
+  background-color: #64adff;
+}
+
+div.container div.chartoption p.katakana-option {
+  color: black;
+  background-color: #ffb464;
+}
+
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;

@@ -12,6 +12,30 @@ div.container{
     padding: 20px 0px;
     height: max-content;
     background-color: $white;
+
+    div.chartoption{
+        font-family: 'Abel', sans-serif;
+        p{
+            padding: 4px 6px;
+            width: min-content;
+            font-size: 1.25rem;
+            border-radius: 4px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        p:hover{
+            opacity: .9;
+        }
+        p.hiragana-option{
+            width: 95px;
+            color: white;
+            background-color: #64adff;
+        }
+        p.katakana-option{
+            color: black;
+            background-color: #ffb464;
+        }
+    }
 }
 
 .flex{

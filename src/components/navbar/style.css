@@ -101,12 +101,6 @@ div.Navbar div.subtitles h3.hiragana-subtitle {
   padding-right: 50px;
 }
 
-@media only screen and (min-width: 950px) {
-  div.Navbar {
-    background-color: blueviolet;
-  }
-}
-
 @keyframes firstCloud {
   from {
     left: 100%;

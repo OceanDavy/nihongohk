@@ -56,6 +56,7 @@ const Flashcard = () => {
   let toGuess = [];
   let cards = [];
 
+  //Function that generates only the Hiragana Charts
   const hiraganaGenerate = () =>{
     cards = [];
 
@@ -76,6 +77,7 @@ const Flashcard = () => {
         });
   };
 
+  //Function that generates only the Katakana Charts
 const katakanaGenerate = () => {
     cards = [];
 
@@ -96,6 +98,7 @@ const katakanaGenerate = () => {
         });
   };
 
+  //Guess function that checks if users option chosen is correct or not
 const guessMethod = (answer) => {
   if(answer === data.guessCard[1]){
     console.log("Correct! " + answer);
@@ -118,12 +121,8 @@ const guessMethod = (answer) => {
   }
   }
 
+  //function that jumps to the next character (next) 
   const nextChart = () => {
-    if(hiraganaArr.includes()){
-      console.log("yep cock")
-    }else{
-      console.log("Sadge")
-    }
   }
 
     return (

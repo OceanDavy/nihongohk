@@ -28,7 +28,8 @@ div.flashcard-box div.flashcard {
 
 div.flashcard-box div.flashcard div.partA {
   position: relative;
-  width: inherit;
+  width: 300px;
+  height: 266px;
 }
 
 div.flashcard-box div.flashcard div.partA p.score {
@@ -57,6 +58,7 @@ div.flashcard-box div.flashcard div.partA div.win-message {
 div.flashcard-box div.flashcard div.partA div.win-message p.correct {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #38cc14;
 }
 
 div.flashcard-box div.flashcard div.partA div.win-message p.next {
@@ -70,6 +72,11 @@ div.flashcard-box div.flashcard div.partA div.win-message p.next:hover {
   color: #4da0ff;
 }
 
+div.flashcard-box div.flashcard div.partB {
+  width: 246.75px;
+  height: 113.733px;
+}
+
 div.flashcard-box div.flashcard div.partB div.options {
   padding: 6px 0px;
   display: -webkit-box;
@@ -79,7 +86,13 @@ div.flashcard-box div.flashcard div.partB div.options {
       justify-content: space-around;
 }
 
-div.flashcard-box div.flashcard div.partB div.options p {
+div.flashcard-box div.flashcard div.partB div.options button {
+  background: none;
+  border: none;
+}
+
+div.flashcard-box div.flashcard div.partB div.options button p {
+  color: black;
   font-size: 30px;
   font-weight: bold;
   cursor: pointer;

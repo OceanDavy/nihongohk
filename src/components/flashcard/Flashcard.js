@@ -1,3 +1,4 @@
+import { isDisabled } from '@testing-library/user-event/dist/utils';
 import React, {Fragment, useState } from 'react';
 import OptionChart from '../optionchart/OptionChart';
 import "./flashcard.css";
@@ -10,7 +11,8 @@ const Flashcard = () => {
     optionsCards: [],
     score: 0,
     status: "",
-    next: ""
+    next: "",
+    isDisabled: false
   });
 
   let hiraganaArr = [
@@ -64,13 +66,14 @@ const Flashcard = () => {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        setData((prevState) => ({
-          ...prevState,
+        setData({
           guessCard: toGuess,
           optionsCards: cards,
+          score: 0,
           status: "",
-          next: ""
-        }));
+          next: "",
+          isDisabled: false
+        });
   };
 
 const katakanaGenerate = () => {
@@ -83,13 +86,14 @@ const katakanaGenerate = () => {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        setData((prevState) => ({
-          ...prevState,
+        setData({
           guessCard: toGuess,
           optionsCards: cards,
+          score: 0,
           status: "",
-          next: ""
-        }));
+          next: "",
+          isDisabled: false
+        });
   };
 
 const guessMethod = (answer) => {
@@ -100,17 +104,28 @@ const guessMethod = (answer) => {
       ...prevState,
       score: prevState.score + 5,
       status: "Correct!",
-      next: "Next!"
+      next: "Next!",
+      isDisabled: true
     }));
+    
   } else{
-    console.log("RIP");
+    setData((prevState) => ({
+      ...prevState,
+      status: "Wrong!",
+      next: "Again!",
+      isDisabled: true
+    }));
   }
   }
 
   const nextChart = () => {
-    
+    if(hiraganaArr.includes()){
+      console.log("yep cock")
+    }else{
+      console.log("Sadge")
+    }
   }
-  
+
     return (
       <Fragment>
         <OptionChart 
@@ -125,7 +140,7 @@ const guessMethod = (answer) => {
                   <p className='chart' id='chart'> { data.guessCard[1] } </p>
                   <div className='win-message flex'>
                       <p className='correct' id='correct'> { data.status }</p>
-                      <p className='next' id='next'> { data.next } </p>
+                      <p className='next' id='next' onClick={nextChart}> { data.next } </p>
                   </div>
               </div>
               {/* OPTIONS SECTION */ }
@@ -133,7 +148,11 @@ const guessMethod = (answer) => {
                   <h3>Choose Your Answer</h3>
                   <div className='options'>
                     { data.optionsCards.map((datas, i) => (
-                        <p onClick={() => guessMethod(datas[1])} key={i}> { datas[0] } </p>    
+                        <button 
+                          disabled={data.isDisabled} 
+                          onClick={() => guessMethod(datas[1])} key={i}> 
+                          <p> { datas[0] } </p>
+                        </button>
                       ))}
                   </div>
               </div>

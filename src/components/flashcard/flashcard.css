@@ -77,6 +77,10 @@ div.flashcard-box div.flashcard div.partB {
   height: 113.733px;
 }
 
+div.flashcard-box div.flashcard div.partB h3.chooseH3 {
+  font-size: 1.6rem;
+}
+
 div.flashcard-box div.flashcard div.partB div.options {
   padding: 6px 0px;
   display: -webkit-box;

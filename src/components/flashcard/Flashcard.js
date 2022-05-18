@@ -1,4 +1,3 @@
-import { isDisabled } from '@testing-library/user-event/dist/utils';
 import React, {Fragment, useState } from 'react';
 import OptionChart from '../optionchart/OptionChart';
 import "./flashcard.css";
@@ -123,6 +122,12 @@ const guessMethod = (answer) => {
 
   //function that jumps to the next character (next) 
   const nextChart = () => {
+    let checkChart = hiraganaArr.find((i) => i[1] === data.guessCard[1]);
+    if(checkChart){
+      hiraganaGenerate();
+    }else{
+      katakanaGenerate();
+    }
   }
 
     return (
@@ -144,7 +149,7 @@ const guessMethod = (answer) => {
               </div>
               {/* OPTIONS SECTION */ }
               <div className='partB'> 
-                  <h3>Choose Your Answer</h3>
+                  <h3 className='chooseH3'>Choose Your Answer</h3>
                   <div className='options'>
                     { data.optionsCards.map((datas, i) => (
                         <button 

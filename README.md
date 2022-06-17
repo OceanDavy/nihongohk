@@ -1,5 +1,5 @@
 Download and run the APP by using "npm start".
-The proyect was made to learn and understand the core concepts of ReactJS and how the components can interact with each other,
+The project was made to learn and understand the core concepts of ReactJS and how the components can interact with each other,
 since I like Japanese Culture I thought that creating a Flashcard game about the Japanese Syllabary would be a cool and interesting way to learn this Library.
 
 The game has 2 buttons:

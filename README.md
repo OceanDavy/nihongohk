@@ -8,7 +8,7 @@ The game has 2 buttons:
 
 Each one of them will display their specific charts
 After you pressed a button it will display in the box down below 
-a Symbol (hiragana / katakana chart) and 3 options in the romanji format.
+a Symbol (hiragana / katakana chart) and 3 options in the romaji format.
 
 Every correct answer will give you 5+ points to your score, you have only 1 opportunity to choose the correct answer
 if you choose the incorrect answer the game will end and your score will be reseted.

@@ -5,6 +5,7 @@ import "./flashcard.css";
 
 const Flashcard = () => {
   
+  //user status
   const [data, setData] = useState({
     guessCard: [],
     optionsCards: [],
@@ -14,6 +15,7 @@ const Flashcard = () => {
     isDisabled: false
   });
 
+  //Hiragana and Katakana arrays/charts (Romanji / Chart)
   let hiraganaArr = [
     ["A", "あ"], ["I", "い"], ["U", "う"],
     ["E", "え"], ["O", "お"], ["KA", "か"],
@@ -55,7 +57,7 @@ const Flashcard = () => {
   let toGuess = [];
   let cards = [];
 
-  //Function that generates only the Hiragana Charts
+  //Function that generates only the Hiragana Charts | Button "Next" call this function
   const hiraganaGenerate = () =>{
     cards = [];
 
@@ -66,17 +68,17 @@ const Flashcard = () => {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        setData({
+        setData((prevState) => ({
+          ...prevState,
           guessCard: toGuess,
           optionsCards: cards,
-          score: 0,
           status: "",
           next: "",
           isDisabled: false
-        });
+        }));
   };
 
-  //Function that generates only the Katakana Charts
+  //Function that generates only the Katakana Charts | Next Button will call this func
 const katakanaGenerate = () => {
     cards = [];
 
@@ -87,15 +89,40 @@ const katakanaGenerate = () => {
     console.log(toGuess);
     console.log(cards[1][0] + " " + cards[0][0]  + " "+ cards[2][0]);
 
-        setData({
-          guessCard: toGuess,
-          optionsCards: cards,
-          score: 0,
-          status: "",
-          next: "",
-          isDisabled: false
-        });
+    setData((prevState) => ({
+      ...prevState,
+      guessCard: toGuess,
+      optionsCards: cards,
+      status: "",
+      next: "",
+      isDisabled: false
+    }));
   };
+
+  //This function it's called from the Hiragana Button on top of the Guess Box
+  //This will helps us to reset the score if User click on the Hiragana Button
+  const btnHiragana = () => {
+    hiraganaGenerate(
+      setData((prevState) => ({
+        ...prevState,
+        guessCard: toGuess,
+        optionsCards: cards,
+        score: 0
+      }))
+    );
+  }
+
+  //Same as BtnHiragana but for the Katakana charts, it will reset the game
+  const btnKatakana = () => {
+    katakanaGenerate(
+      setData((prevState) => ({
+        ...prevState,
+        guessCard: toGuess,
+        optionsCards: cards,
+        score: 0
+      }))
+    );
+  }
 
   //Guess function that checks if users option chosen is correct or not
 const guessMethod = (answer) => {
@@ -113,6 +140,7 @@ const guessMethod = (answer) => {
   } else{
     setData((prevState) => ({
       ...prevState,
+      score: 0,
       status: "Wrong!",
       next: "Again!",
       isDisabled: true
@@ -121,20 +149,28 @@ const guessMethod = (answer) => {
   }
 
   //function that jumps to the next character (next) 
+  //Checks if chart guessed is on hiragana or katakana list
+  //If its a hira chart then calls the method HiraganaGenerate()
+  //If its a katakana chart then calls the method katakanaGenerate()
   const nextChart = () => {
-    let checkChart = hiraganaArr.find((i) => i[1] === data.guessCard[1]);
-    if(checkChart){
-      hiraganaGenerate();
-    }else{
-      katakanaGenerate();
+    let checkChart;
+    let i = 0;
+    //Loop the outer array (which is one)
+    for(i = 0; i <= hiraganaArr.length; i++){
+      var innerL = hiraganaArr[i].length;
+
+      for(let j = 0; j <= innerL; j++){
+        console.log(hiraganaArr[1]);
+      }
     }
-  }
+  };
+
 
     return (
       <Fragment>
         <OptionChart 
-          optionHiragana={hiraganaGenerate} 
-          optionKatakana={katakanaGenerate} 
+          optionHiragana={btnHiragana} 
+          optionKatakana={btnKatakana} 
         />
         <div className='flashcard-box flex'>
             <div className='flashcard'>
@@ -143,7 +179,7 @@ const guessMethod = (answer) => {
                   <p className='score' id='score'>Score: { data.score }</p>
                   <p className='chart' id='chart'> { data.guessCard[1] } </p>
                   <div className='win-message flex'>
-                      <p className='correct' id='correct'> { data.status }</p>
+                      <p className={`${data.status}` === "Correct!" ? "correct" : "wrong"}> { data.status }</p>
                       <p className='next' id='next' onClick={nextChart}> { data.next } </p>
                   </div>
               </div>

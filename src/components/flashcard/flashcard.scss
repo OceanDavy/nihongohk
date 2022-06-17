@@ -32,11 +32,17 @@ div.flashcard-box {
                 align-items: center;
                 justify-content: space-between;
 
-                p.correct{
+                .correct{
                     font-size: 1.5rem;
                     font-weight: bold;
                     color: rgb(56, 204, 20);
                  }
+                .wrong{
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: rgb(203, 8, 8);
+                }
+
                 p.next{
                     font-size: 1.5rem;
                     font-weight: bold;
